@@ -140,4 +140,20 @@ public class TesteCampoTreinamento {
 		Assert.assertEquals(3, itensSelecionados.size());
 		driver.quit();
 	}
+	
+	
+	@Test
+	public void deveInteragirComBotoes() {
+		WebDriver driver = new ChromeDriver();
+
+		driver.manage().window().setPosition(new Point(50, 50));
+		driver.manage().window().setSize(new Dimension(1080, 500));
+		
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/campo-treinamento/componentes.html");
+		
+		WebElement botao = driver.findElement(By.id("buttonSimple"));
+		botao.click();
+		Assert.assertEquals("Obrigado!", botao.getAttribute("value"));
+		driver.quit();
+	}
 }
