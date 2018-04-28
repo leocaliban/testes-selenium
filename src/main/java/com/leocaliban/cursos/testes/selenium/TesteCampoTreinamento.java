@@ -1,5 +1,7 @@
 package com.leocaliban.cursos.testes.selenium;
 
+import java.util.List;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.openqa.selenium.By;
@@ -9,8 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.Select;
-
-import com.sun.xml.internal.bind.v2.schemagen.xmlschema.List;
 
 public class TesteCampoTreinamento {
 	
@@ -112,10 +112,32 @@ public class TesteCampoTreinamento {
 		WebElement element = driver.findElement(By.id("elementosForm:escolaridade"));
 		Select combo = new Select(element);
 		
-		java.util.List<WebElement> options = combo.getOptions();
+		List<WebElement> options = combo.getOptions();
 
 		Assert.assertEquals(8, options.size());
 		
+		driver.quit();
+	}
+	
+	
+	@Test
+	public void deveVerificarValoresDoComboBoxMultiplo() {
+		WebDriver driver = new ChromeDriver();
+
+		driver.manage().window().setPosition(new Point(50, 50));
+		driver.manage().window().setSize(new Dimension(1080, 500));
+		
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/campo-treinamento/componentes.html");
+		
+		WebElement element = driver.findElement(By.id("elementosForm:esportes"));
+		Select combo = new Select(element);
+		
+		combo.selectByVisibleText("Natacao");
+		combo.selectByVisibleText("Corrida");
+		combo.selectByVisibleText("Karate");
+		
+		List<WebElement> itensSelecionados = combo.getAllSelectedOptions();
+		Assert.assertEquals(3, itensSelecionados.size());
 		driver.quit();
 	}
 }
