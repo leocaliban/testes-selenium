@@ -75,4 +75,30 @@ public class TesteAlert {
 		driver.quit();
 
 	}
+	
+	@Test
+	public void deveInteragirComAlertPrompt() {
+		WebDriver driver = new ChromeDriver();
+
+		driver.manage().window().setPosition(new Point(50, 50));
+		driver.manage().window().setSize(new Dimension(1080, 500));
+		
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/campo-treinamento/componentes.html");
+		
+		driver.findElement(By.id("prompt")).click();
+		
+		Alert alert = driver.switchTo().alert();
+
+		Assert.assertEquals("Digite um numero", alert.getText());
+		alert.sendKeys("200");
+		alert.accept();
+				
+		Assert.assertEquals("Era 200?", alert.getText());
+		alert.accept();
+		
+		Assert.assertEquals(":D", alert.getText());
+		alert.accept();
+		driver.quit();
+
+	}
 }
