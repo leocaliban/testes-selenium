@@ -27,6 +27,52 @@ public class TesteAlert {
 		alert.accept();
 		
 		driver.findElement(By.id("elementosForm:nome")).sendKeys(textoAlerta);
+		
+		driver.quit();
+
+	}
+	
+	@Test
+	public void deveInteragirComAlertConfirmAceitar() {
+		WebDriver driver = new ChromeDriver();
+
+		driver.manage().window().setPosition(new Point(50, 50));
+		driver.manage().window().setSize(new Dimension(1080, 500));
+		
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/campo-treinamento/componentes.html");
+		
+		driver.findElement(By.id("confirm")).click();
+		
+		Alert alert = driver.switchTo().alert();
+
+		Assert.assertEquals("Confirm Simples", alert.getText());
+		alert.accept();
+				
+		Assert.assertEquals("Confirmado", alert.getText());
+		alert.accept();
+		driver.quit();
+
+	}
+	
+	@Test
+	public void deveInteragirComAlertConfirmNegar() {
+		WebDriver driver = new ChromeDriver();
+
+		driver.manage().window().setPosition(new Point(50, 50));
+		driver.manage().window().setSize(new Dimension(1080, 500));
+		
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/campo-treinamento/componentes.html");
+		
+		driver.findElement(By.id("confirm")).click();
+		
+		Alert alert = driver.switchTo().alert();
+
+		Assert.assertEquals("Confirm Simples", alert.getText());
+		alert.dismiss();
+				
+		Assert.assertEquals("Negado", alert.getText());
+		alert.accept();
+		driver.quit();
 
 	}
 }
