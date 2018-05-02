@@ -52,6 +52,8 @@ public class TesteCadastro {
 		Assert.assertEquals("Comida: Carne Frango Pizza", driver.findElement(By.id("descComida")).getText());
 		Assert.assertEquals("Escolaridade: superior", driver.findElement(By.id("descEscolaridade")).getText());
 		Assert.assertEquals("Esportes: Futebol", driver.findElement(By.id("descEsportes")).getText());
+		
+		driver.quit();
 
 	}
 
