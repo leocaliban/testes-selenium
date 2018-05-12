@@ -30,4 +30,30 @@ public class TesteJanelas {
 		driver.quit();
 	}
 	
+	@Test
+	public void deveInteragirComJanelasSemTitulo() {
+		WebDriver driver = new ChromeDriver();
+
+		driver.manage().window().setPosition(new Point(50, 50));
+		driver.manage().window().setSize(new Dimension(1080, 500));
+		
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/campo-treinamento/componentes.html");
+		
+		driver.findElement(By.id("buttonPopUpHard")).click();
+		
+		System.out.println(driver.getWindowHandle()); //obtendo o id da janela atual
+		System.out.println(driver.getWindowHandles()); // ids das janelas gerenciadas
+		
+		driver.switchTo().window((String)driver.getWindowHandles().toArray()[1]);
+		
+		driver.findElement(By.tagName("textarea")).sendKeys("Escrevendo na janela nova!");
+		
+		driver.switchTo().window((String)driver.getWindowHandles().toArray()[0]);
+		
+		driver.findElement(By.tagName("textarea")).sendKeys("Escrevendo na janela principal!");
+
+		driver.quit();
+		
+	}
+	
 }
